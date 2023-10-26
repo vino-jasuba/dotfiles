@@ -1,15 +1,9 @@
 #!/usr/bin/env sh
 
-sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+sudo apt -y update && sudo apt -y upgrade
 
-sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-
-sudo dnf install -y \
-    anacron \
+sudo apt -y install \
     cargo \
-    gnome-tweaks \
-    gnome-extensions-app \
-    neovim \
     python3-neovim \
     git \
     kitty \
@@ -18,12 +12,6 @@ sudo dnf install -y \
     lua-devel \
     luarocks \
     php \
-    php-bcmath \
-    php-mysqlnd \
-    php-pecl-zip \
-    php-pgsql \
-    php-posix \
-    php-soap \
     docker-ce \
     docker-ce-cli \
     containerd.io \
@@ -36,17 +24,10 @@ sudo dnf install -y \
     ruby \
     python3 \
     htop \
-    proselint \
     lm_sensors \
-    discord \
-    slack
+    lolcat
 
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub org.telegram.desktop
-
-sudo gem install lolcat
-
-pip install gitlint
+pip3 install gitlint
 
 sudo luarocks install luacheck
 

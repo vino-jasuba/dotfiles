@@ -20,7 +20,6 @@ VI_MODE_SET_CURSOR=true
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 
 plugins=(
-    artisan
     npm
     vi-mode
     composer
@@ -52,7 +51,7 @@ path=(
     $HOME/.cargo/bin
     ./vendor/bin
     $HOME/.local/share/bob/nvim-bin
-    $HOME/Code/jessarcher/dotfiles/scripts
+    $HOME/Repo/dotfiles/scripts
     ${ANDROID_HOME}tools/
     ${ANDROID_HOME}platform-tools/
     $path
@@ -60,7 +59,7 @@ path=(
 
 setopt auto_cd
 cdpath=(
-    $HOME/Code
+    $HOME/Repo
 )
 
 zstyle ':completion:*' group-name ''
@@ -155,13 +154,12 @@ zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 ### Fix slowness of pastes
 
-if [ -e /home/jess/.nix-profile/etc/profile.d/nix.sh ]; then . /home/jess/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 if [[ $- == *i* && $0 == '/usr/bin/zsh' ]]; then
-    ~/Code/jessarcher/dotfiles/scripts/login.sh
+    ~/Repo/dotfiles/scripts/login.sh
 fi
 
 # vim: nospell
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

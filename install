@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES="$HOME/Repo/dotfiles"
 
 # Zsh
 ln -sf $DOTFILES/zsh/zshrc $HOME/.zshrc

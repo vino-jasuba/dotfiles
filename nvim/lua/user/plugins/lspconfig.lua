@@ -81,7 +81,7 @@ return {
     })
 
     -- Tailwind CSS
-    require('lspconfig').tailwindcss.setup({ capabilities = capabilities })
+    -- require('lspconfig').tailwindcss.setup({ capabilities = capabilities })
 
     -- JSON
     require('lspconfig').jsonls.setup({

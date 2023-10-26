@@ -88,3 +88,7 @@
     rebase = false
 [init]
     defaultBranch = main
+[user]
+	signingkey = /home/jasuba/.ssh/vino-jasuba.pub
+	name = Vincent Odhiambo
+	email = ovincent7949@gmail.com
