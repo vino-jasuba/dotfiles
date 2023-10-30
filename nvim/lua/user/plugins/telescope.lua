@@ -36,7 +36,7 @@ return {
             ['<C-Up>'] = actions.cycle_history_prev,
           },
         },
-        file_ignore_patterns = { '.git/', 'node_modules/', 'vendor/', 'virtualenv/' },
+        file_ignore_patterns = { '.git/', 'node_modules/', 'virtualenv/' },
       },
       extensions = {
         live_grep_args = {
