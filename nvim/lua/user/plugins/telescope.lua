@@ -62,10 +62,10 @@ return {
           prompt_title = 'History',
         },
         lsp_references = {
-          previewer = false,
+          previewer = true,
         },
         lsp_definitions = {
-          previewer = false,
+          previewer = true,
         },
         lsp_document_symbols = {
           symbol_width = 55,
