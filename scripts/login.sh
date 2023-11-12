@@ -11,3 +11,6 @@ printf "
 " | lolcat --truecolor --seed=$seed --spread=6
 exit
 
+# Set default output device to HDMI audio
+pactl set-default-sink $(pactl list short sinks | cut -f2 | sort | head -n 1)
+
