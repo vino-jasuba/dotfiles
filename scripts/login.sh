@@ -6,11 +6,14 @@ memTotal=$(free -m | grep "Mem" | awk '{printf "%.fG", $2/1000}')
 cpuTemp=$(sensors | grep CPU | awk '{print $2}' | sed 's/+//' | tr -d '\n')
 loadAvg=$(cat /proc/loadavg | awk '{printf "%s %s %s", $1, $2, $3}')
 
+# Set default output device to HDMI audio
+selected_output=$(pactl list short sinks | cut -f2 | sort | head -n 1)
+
+pactl set-default-sink $selected_output
+
 printf "
-  󰕈 $os  $memUsed/$memTotal   $cpuTemp  辰$loadAvg
+  󰕈 $os  $memUsed/$memTotal   $cpuTemp  辰$loadAvg [Audio output]: $selected_output
 " | lolcat --truecolor --seed=$seed --spread=6
 exit
 
-# Set default output device to HDMI audio
-pactl set-default-sink $(pactl list short sinks | cut -f2 | sort | head -n 1)
 
