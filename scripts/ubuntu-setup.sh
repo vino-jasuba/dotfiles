@@ -16,7 +16,6 @@ sudo apt -y install \
     docker-ce-cli \
     containerd.io \
     docker-compose-plugin \
-    bat \
     fzf \
     httpie \
     ripgrep \
