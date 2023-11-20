@@ -23,29 +23,43 @@ function get_cache_file {
     fi
 }
 
-cache_file=$(get_cache_file)
 
-if [[ -s $cache_file ]]; then
-    # Cache File Exists and is NOT empty
-    selected_instance=$(cat $cache_file | fzf)
-else
-    echo "Cache File Empty: Fetching EC2 instances"
+function select_instance {
+    cache_file=$(get_cache_file)
 
-    cache_aws_instances "$cache_file"
+    if [[ -s $cache_file ]]; then
+        # Cache File Exists and is NOT empty
+        selected_instance=$(cat $cache_file | fzf)
+    else
+        echo "Cache File Empty: Fetching EC2 instances"
 
-    selected_instance=$(cat $cache_file | fzf)
-fi
+        cache_aws_instances "$cache_file"
+
+        selected_instance=$(cat $cache_file | fzf)
+    fi
+
+    echo $selected_instance
+}
 
 option=$1
-TargetInstanceId=$(echo $selected_instance | cut -d ':' -f 3 | xargs)
 
-if [[ "p" == "$option" ]]; then
-    # start port forwarding session on port 22
-    aws ssm start-session --region us-west-1 --profile twp \
-        --document-name AWS-StartPortForwardingSession \
-        --parameters '{"portNumber":["22"], "localPortNumber":["56789"]}' \
-        --target $TargetInstanceId
-else
-    aws ssm start-session --region us-west-1 --profile twp --target $TargetInstanceId
-fi
+case $option in
+    "p" | "port-forward")
+        # start port forwarding session on port 22
+        TargetInstanceId=$(echo $(select_instance) | cut -d ':' -f 3 | xargs)
+
+        aws ssm start-session --region us-west-1 --profile twp \
+            --document-name AWS-StartPortForwardingSession \
+            --parameters '{"portNumber":["22"], "localPortNumber":["56789"]}' \
+            --target $TargetInstanceId
+        ;;
+    "r" | "refresh-cache")
+        cache_aws_instances "$(get_cache_file)"
+        ;;
+    *)
+        TargetInstanceId=$(echo $(select_instance) | cut -d ':' -f 3 | xargs)
+
+        aws ssm start-session --region us-west-1 --profile twp --target $TargetInstanceId
+esac
+
 
