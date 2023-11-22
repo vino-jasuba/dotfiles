@@ -25,28 +25,32 @@ function get_cache_file {
 
 
 function select_instance {
+    query=$1
     cache_file=$(get_cache_file)
 
     if [[ -s $cache_file ]]; then
         # Cache File Exists and is NOT empty
-        selected_instance=$(cat $cache_file | fzf)
+        selected_instance=$(cat $cache_file | fzf --query "$query")
     else
         echo "Cache File Empty: Fetching EC2 instances"
 
         cache_aws_instances "$cache_file"
 
-        selected_instance=$(cat $cache_file | fzf)
+        selected_instance=$(cat $cache_file | fzf --query "$query")
     fi
 
     echo $selected_instance
 }
 
 option=$1
+query=$2
 
 case $option in
     "p" | "port-forward")
         # start port forwarding session on port 22
-        TargetInstanceId=$(echo $(select_instance) | cut -d ':' -f 3 | xargs)
+        TargetInstanceId=$(echo $(select_instance "$query") | cut -d ':' -f 3 | xargs)
+
+        [ -z "$TargetInstanceId" ] && echo "You can't tease me like that Dawg! Bye!" && exit 1
 
         aws ssm start-session --region us-west-1 --profile twp \
             --document-name AWS-StartPortForwardingSession \
@@ -57,7 +61,9 @@ case $option in
         cache_aws_instances "$(get_cache_file)"
         ;;
     *)
-        TargetInstanceId=$(echo $(select_instance) | cut -d ':' -f 3 | xargs)
+        TargetInstanceId=$(echo $(select_instance "$option") | cut -d ':' -f 3 | xargs)
+
+        [ -z "$TargetInstanceId" ] && echo "You can't tease me like that Dawg! Bye!" && exit 1
 
         aws ssm start-session --region us-west-1 --profile twp --target $TargetInstanceId
 esac
