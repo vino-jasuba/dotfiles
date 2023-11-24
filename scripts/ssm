@@ -14,10 +14,13 @@ function cache_aws_instances {
 function get_cache_file {
     prefix="$(whoami).ec2.instances"
 
-    cache_dir=$(ls "/tmp/" | grep $prefix | head -n 1)
+    # On some systems (Ubuntu 22.04) the TMPDIR env variable isn't set. This is a cross platform workaround
+    tmp_dir="$(dirname $(mktemp -u -t))"
+
+    cache_dir=$(ls "$tmp_dir" | grep $prefix | head -n 1)
 
     if [[ ! -z $cache_dir ]]; then
-        echo "/tmp/$cache_dir"
+        echo "$tmp_dir/$cache_dir"
     else
         echo $(mktemp $prefix"XXXXX" --tmpdir)
     fi
