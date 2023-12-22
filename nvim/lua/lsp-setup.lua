@@ -79,8 +79,19 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+  tsserver = {},
+
+  html = { filetypes = { 'html', 'twig', 'hbs'} },
+
+  intelephense = {
+    -- commands = {
+    --   IntelephenseIndex = {
+    --     function()
+    --       vim.lsp.buf.execute_command({ command = 'intelephense.index.workspace' })
+    --     end,
+    --   },
+    -- },
+  },
 
   lua_ls = {
     Lua = {
