@@ -6,13 +6,43 @@
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
+  -- Add, change, and delete surrounding text.
+  { 'tpope/vim-surround' },
+
+  -- Useful commands like :Rename and :SudoWrite.
+  { 'tpope/vim-eunuch' },
+
+  -- Pairs of handy bracket mappings, like [b and ]b.
+  { 'tpope/vim-unimpaired', event = 'VeryLazy' },
+
+  -- Indent autodetection with editorconfig support.
+  { 'tpope/vim-sleuth' },
+
+  -- Allow plugins to enable repeating of commands.
+  { 'tpope/vim-repeat' },
+
+  -- Navigate seamlessly between Vim windows and Tmux panes.
+  { 'christoomey/vim-tmux-navigator' },
+
+  -- Jump to the last location when opening a file.
+  { 'farmergreg/vim-lastplace' },
+
+  -- Enable * searching with visually selected text.
+  { 'nelstrom/vim-visual-star-search' },
+
+  -- Automatically create parent dirs when saving.
+  { 'jessarcher/vim-heritage' },
+
+  -- Text objects for HTML attributes.
+  { 'whatyouhide/vim-textobj-xmlattr', dependencies = 'kana/vim-textobj-user'  },
+
+ -- Add smooth scrolling to avoid jarring jumps
+  { 'karb94/neoscroll.nvim', config = true },
+
 
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
-
-  -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
