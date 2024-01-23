@@ -2,6 +2,12 @@
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
+    prompt_prefix = '   ',
+    selection_caret = '  ',
+    layout_config = {
+      prompt_position = 'top',
+    },
+    sorting_strategy = 'ascending',
     mappings = {
       i = {
         ['<C-u>'] = false,
