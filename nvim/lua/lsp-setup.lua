@@ -84,13 +84,19 @@ local servers = {
   html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   intelephense = {
-    -- commands = {
-    --   IntelephenseIndex = {
-    --     function()
-    --       vim.lsp.buf.execute_command({ command = 'intelephense.index.workspace' })
-    --     end,
-    --   },
-    -- },
+    settings = {
+        intelephense = {
+          telemetry = {
+            enabled = false,
+          },
+          completion = {
+            fullyQualifyGlobalConstantsAndFunctions = false
+          },
+          phpdoc = {
+            returnVoid = false,
+          }
+        },
+      }
   },
 
   lua_ls = {

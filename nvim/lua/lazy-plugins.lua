@@ -15,6 +15,9 @@ require('lazy').setup({
   -- Pairs of handy bracket mappings, like [b and ]b.
   { 'tpope/vim-unimpaired', event = 'VeryLazy' },
 
+  -- Automatically add closing brackets, quotes, etc.
+  { 'windwp/nvim-autopairs', config = true },
+
   -- Indent autodetection with editorconfig support.
   { 'tpope/vim-sleuth' },
 
