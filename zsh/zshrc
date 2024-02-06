@@ -32,6 +32,7 @@ plugins=(
     rsync
     tmux
     z
+    asdf
 )
 
 source $ZSH/oh-my-zsh.sh
