@@ -39,4 +39,6 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+-- Set relative line numbers
+vim.o.relativenumber = true
 -- vim: ts=2 sts=2 sw=2 et
