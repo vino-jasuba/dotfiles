@@ -14,7 +14,25 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
+    file_ignore_patterns = { '.git/', 'node_modules/', 'virtualenv/' },
   },
+  pickers = {
+    find_files = {
+      hidden = true,
+    },
+    oldfiles = {
+      prompt_title = 'History',
+    },
+    lsp_references = {
+      previewer = true,
+    },
+    lsp_definitions = {
+      previewer = true,
+    },
+    lsp_document_symbols = {
+      symbol_width = 55,
+    },
+  }
 }
 
 -- Enable telescope fzf native, if installed

@@ -9,6 +9,10 @@ ln -sf $DOTFILES/zsh/zshrc $HOME/.zshrc
 rm -rf $HOME/.config/nvim
 ln -s $DOTFILES/nvim $HOME/.config/nvim
 
+# IdeaVim
+rm -rf $HOME/.ideavimrc
+ln -s $DOTFILES/ideavim/ideavimrc $HOME/.ideavimrc
+
 # Kitty
 rm -rf $HOME/.config/kitty
 ln -s $DOTFILES/kitty $HOME/.config/kitty

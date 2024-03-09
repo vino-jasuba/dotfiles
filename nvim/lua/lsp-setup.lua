@@ -81,22 +81,25 @@ local servers = {
   -- rust_analyzer = {},
   tsserver = {},
 
-  html = { filetypes = { 'html', 'twig', 'hbs'} },
+  html = { filetypes = { 'html', 'twig', 'hbs' } },
 
   intelephense = {
     settings = {
-        intelephense = {
-          telemetry = {
-            enabled = false,
-          },
-          completion = {
-            fullyQualifyGlobalConstantsAndFunctions = false
-          },
-          phpdoc = {
-            returnVoid = false,
-          }
+      intelephense = {
+        telemetry = {
+          enabled = false,
         },
-      }
+        completion = {
+          fullyQualifyGlobalConstantsAndFunctions = false
+        },
+        phpdoc = {
+          returnVoid = false,
+        },
+        files = {
+          maxSize = 3000000
+        },
+      },
+    }
   },
 
   lua_ls = {
