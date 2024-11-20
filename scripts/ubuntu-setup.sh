@@ -24,13 +24,17 @@ sudo apt -y install \
     python3 \
     htop \
     lm_sensors \
-    lolcat
+    lolcat \
+    tealdeer
 
 pip3 install gitlint
 
 sudo luarocks install luacheck
 
 cargo install stylua
+
+# Update tldr cache
+tldf --update
 
 # Composer
 ./install-composer.sh
