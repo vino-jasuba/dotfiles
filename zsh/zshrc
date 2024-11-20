@@ -170,3 +170,9 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# man pager
+
+export MANPAGER='nvim +Man!'
+
+# end man pager
