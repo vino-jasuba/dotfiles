@@ -25,13 +25,19 @@ sudo apt -y install \
     htop \
     lm_sensors \
     lolcat \
-    tealdeer
+    tealdeer \
+    fd-find
 
 pip3 install gitlint
 
 sudo luarocks install luacheck
 
 cargo install stylua
+
+# Setup fdfind
+# On Ubuntu fd-find is installed as fdfind https://github.com/sharkdp/fd/issues/791
+ln -s $(which fdfind) ~/.local/bin/fd
+
 
 # Update tldr cache
 tldf --update
