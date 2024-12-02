@@ -7,8 +7,6 @@ return {
       "typescript",
       "dockerfile",
       "gitignore",
-      "php",
-      "phpdoc",
     })
   end,
 }
