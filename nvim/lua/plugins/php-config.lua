@@ -25,4 +25,10 @@ return {
     dependencies = { "V13Axel/neotest-pest" },
     opts = { adapters = { "neotest-pest" } },
   },
+  {
+    -- Add neotest PHPUnit plugin
+    "nvim-neotest/neotest",
+    dependencies = { "olimorris/neotest-phpunit" },
+    opts = { adapters = { "neotest-phpunit" } },
+  },
 }

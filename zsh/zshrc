@@ -176,3 +176,4 @@ esac
 export MANPAGER='nvim +Man!'
 
 # end man pager
+eval "$(mise activate zsh)"

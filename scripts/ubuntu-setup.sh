@@ -3,30 +3,30 @@
 sudo apt -y update && sudo apt -y upgrade
 
 sudo apt -y install \
-    cargo \
-    python3-neovim \
-    git \
-    kitty \
-    zsh \
-    g++ \
-    lua-devel \
-    luarocks \
-    php \
-    docker-ce \
-    docker-ce-cli \
-    containerd.io \
-    docker-compose-plugin \
-    fzf \
-    httpie \
-    ripgrep \
-    tmux \
-    ruby \
-    python3 \
-    htop \
-    lm_sensors \
-    lolcat \
-    tealdeer \
-    fd-find
+	cargo \
+	python3-neovim \
+	git \
+	kitty \
+	zsh \
+	g++ \
+	lua-devel \
+	luarocks \
+	php \
+	docker-ce \
+	docker-ce-cli \
+	containerd.io \
+	docker-compose-plugin \
+	fzf \
+	httpie \
+	ripgrep \
+	tmux \
+	ruby \
+	python3 \
+	htop \
+	lm_sensors \
+	lolcat \
+	tealdeer \
+	fd-find
 
 pip3 install gitlint
 
@@ -37,7 +37,6 @@ cargo install stylua
 # Setup fdfind
 # On Ubuntu fd-find is installed as fdfind https://github.com/sharkdp/fd/issues/791
 ln -s $(which fdfind) ~/.local/bin/fd
-
 
 # Update tldr cache
 tldf --update
