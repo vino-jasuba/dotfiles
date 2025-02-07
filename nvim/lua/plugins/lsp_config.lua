@@ -4,7 +4,15 @@ return {
   opts = {
     ---@type lspconfig.options
     servers = {
-      intelephense = {},
+      intelephense = {
+        commands = {
+          IntelephenseIndex = {
+            function()
+              vim.lsp.buf.execute_command({ command = "intelephense.index.workspace" })
+            end,
+          },
+        },
+      },
     },
   },
 }

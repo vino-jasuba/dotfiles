@@ -15,5 +15,3 @@ printf "
   󰕈 $os  $memUsed/$memTotal   $cpuTemp  辰$loadAvg [Audio output]: $selected_output
 " | lolcat --truecolor --seed=$seed --spread=6
 exit
-
-
