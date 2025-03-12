@@ -60,7 +60,7 @@
 [core]
     editor = nvim
     excludesfile = ~/.gitignore_global
-    pager = delta
+	pager = batcat
 [diff]
     tool = vimdiff
 [fetch]

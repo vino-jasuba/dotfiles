@@ -175,5 +175,10 @@ esac
 
 export MANPAGER='nvim +Man!'
 
+export OLLAMA_MODELS="~/ollama/models/"
+
+# Use Ctrl + Backspace to delete word
+bindkey "^H" backward-delete-word
+
 # end man pager
 eval "$(mise activate zsh)"
