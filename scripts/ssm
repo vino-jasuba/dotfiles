@@ -1,74 +1,72 @@
 #!/bin/bash
 
 function cache_aws_instances {
-    cache_file=$1
+	cache_file=$1
 
-    echo "Caching instances to $cache_file"
+	echo "Caching instances to $cache_file"
 
-    instances=$(aws ec2 describe-instances --profile twp --region us-west-1 |
-        jq '[.Reservations | .[] | .Instances | .[] | select(.State.Name == "running") | {Name: (.Tags[]|select(.Key=="Name") | .Value), InstanceId: .InstanceId} ]')
+	instances=$(aws ec2 describe-instances --profile twpadmin --region us-west-1 |
+		jq '[.Reservations | .[] | .Instances | .[] | select(.State.Name == "running") | {Name: (.Tags[]|select(.Key=="Name") | .Value), InstanceId: .InstanceId} ]')
 
-    echo $instances | jq -r 'map("\(.Name) :: \(.InstanceId)") | .[]' > $cache_file
+	echo $instances | jq -r 'map("\(.Name) :: \(.InstanceId)") | .[]' >$cache_file
 }
 
 function get_cache_file {
-    prefix="$(whoami).ec2.instances"
+	prefix="$(whoami).ec2.instances"
 
-    # On some systems (Ubuntu 22.04) the TMPDIR env variable isn't set. This is a cross platform workaround
-    tmp_dir="$(dirname $(mktemp -u -t))"
+	# On some systems (Ubuntu 22.04) the TMPDIR env variable isn't set. This is a cross platform workaround
+	tmp_dir="$(dirname $(mktemp -u))"
 
-    cache_dir=$(ls "$tmp_dir" | grep $prefix | head -n 1)
+	cache_dir=$(ls "$tmp_dir" | grep $prefix | head -n 1)
 
-    if [[ ! -z $cache_dir ]]; then
-        echo "$tmp_dir/$cache_dir"
-    else
-        echo $(mktemp $prefix"XXXXX" --tmpdir)
-    fi
+	if [[ ! -z $cache_dir ]]; then
+		echo "$tmp_dir/$cache_dir"
+	else
+		echo $(mktemp $prefix"XXXXX" --tmpdir)
+	fi
 }
 
-
 function select_instance {
-    query=$1
-    cache_file=$(get_cache_file)
+	query=$1
+	cache_file=$(get_cache_file)
 
-    if [[ -s $cache_file ]]; then
-        # Cache File Exists and is NOT empty
-        selected_instance=$(cat $cache_file | fzf --query "$query")
-    else
-        echo "Cache File Empty: Fetching EC2 instances"
+	if [[ -s $cache_file ]]; then
+		# Cache File Exists and is NOT empty
+		selected_instance=$(cat $cache_file | fzf --query "$query")
+	else
+		echo "Cache File Empty: Fetching EC2 instances"
 
-        cache_aws_instances "$cache_file"
+		cache_aws_instances "$cache_file"
 
-        selected_instance=$(cat $cache_file | fzf --query "$query")
-    fi
+		selected_instance=$(cat $cache_file | fzf --query "$query")
+	fi
 
-    echo $selected_instance
+	echo $selected_instance
 }
 
 option=$1
 query=$2
 
 case $option in
-    "p" | "port-forward")
-        # start port forwarding session on port 22
-        TargetInstanceId=$(echo $(select_instance "$query") | cut -d ':' -f 3 | xargs)
+"p" | "port-forward")
+	# start port forwarding session on port 22
+	TargetInstanceId=$(echo $(select_instance "$query") | cut -d ':' -f 3 | xargs)
 
-        [ -z "$TargetInstanceId" ] && echo "You can't tease me like that Dawg! Bye!" && exit 1
+	[ -z "$TargetInstanceId" ] && echo "You can't tease me like that Dawg! Bye!" && exit 1
 
-        aws ssm start-session --region us-west-1 --profile twp \
-            --document-name AWS-StartPortForwardingSession \
-            --parameters '{"portNumber":["22"], "localPortNumber":["56789"]}' \
-            --target $TargetInstanceId
-        ;;
-    "r" | "refresh-cache")
-        cache_aws_instances "$(get_cache_file)"
-        ;;
-    *)
-        TargetInstanceId=$(echo $(select_instance "$option") | cut -d ':' -f 3 | xargs)
+	aws ssm start-session --region us-west-1 --profile twpadmin \
+		--document-name AWS-StartPortForwardingSession \
+		--parameters '{"portNumber":["22"], "localPortNumber":["56789"]}' \
+		--target $TargetInstanceId
+	;;
+"r" | "refresh-cache")
+	cache_aws_instances "$(get_cache_file)"
+	;;
+*)
+	TargetInstanceId=$(echo $(select_instance "$option") | cut -d ':' -f 3 | xargs)
 
-        [ -z "$TargetInstanceId" ] && echo "You can't tease me like that Dawg! Bye!" && exit 1
+	[ -z "$TargetInstanceId" ] && echo "You can't tease me like that Dawg! Bye!" && exit 1
 
-        aws ssm start-session --region us-west-1 --profile twp --target $TargetInstanceId
+	aws ssm start-session --region us-west-1 --profile twpadmin --target $TargetInstanceId
+	;;
 esac
-
-

@@ -108,6 +108,7 @@ alias g="git"
 alias gs="git s"
 alias co="git checkout"
 alias main='git checkout $([ `git rev-parse --quiet --verify master` ] && echo "master" || echo "main")'
+alias glp='git log --pretty=format:"%C(yellow)%h%Creset - %C(green)%an%Creset, %ar : %s"'
 nah() {
     git reset --hard
 
@@ -182,3 +183,10 @@ bindkey "^H" backward-delete-word
 
 # end man pager
 eval "$(mise activate zsh)"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/_jasuba/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+export PATH="/Users/_jasuba/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/Users/_jasuba/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"

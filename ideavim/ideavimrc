@@ -9,7 +9,8 @@ Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/argtextobj.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'kana/vim-textobj-entire'
-
+Plug 'machakann/vim-highlightedyank'
+Plug 'justinmk/vim-sneak'
 
 """ Enable Plugins  --------------------------------
 set surround
@@ -23,6 +24,14 @@ set ReplaceWithRegister
 
 """ Plugin settings -------------------------
 let g:argtextobj_pairs="[:],(:),<:>"
+let g:WhichKey_ShowVimActions = "true"
+let g:WhichKey_ShowTypedSequence = "false"
+
+" make the popup show up 'instantly'
+let g:WhichKey_DefaultDelay = 0
+
+" make the popup appear much slower
+let g:WhichKey_DefaultDelay = 600
 
 " disable the timeout option (which-key QoL)
 set notimeout
@@ -35,6 +44,7 @@ set showmode
 set so=5
 set incsearch
 set nu
+set relativenumber
 
 """ Idea specific settings ------------------
 set ideajoin
@@ -60,3 +70,6 @@ map <leader>o <Action>(FileStructurePopup)
 
 """ Custom Keyboard Shortcuts
 map <C-[> <Action>(EditorEscape)
+
+"""
+map <gd> <Action>(GotoDeclaration)

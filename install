@@ -28,6 +28,9 @@ ln -sf $DOTFILES/git/gitignore_global $HOME/.gitignore_global
 rm -rf $HOME/.config/phpactor
 ln -s $DOTFILES/phpactor $HOME/.config/phpactor
 
+# Aerospace Tiling Window Manager
+ln -sf $DOTFILES/aerospace/aerospace.toml $HOME/.aerospace.toml
+
 # Scripts
 mkdir -p $HOME/.local/bin
 
@@ -40,5 +43,5 @@ ln -sf $DOTFILES/nvm/default-packages $HOME/.nvm/default-packages
 
 # Oh My Zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
